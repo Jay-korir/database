@@ -14,7 +14,7 @@ public class Test {
             Connection con= DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/test","root","");
 
-            Statement stmt=con.createStatement();
+            Statement stmt=con.createStatement();git
             ResultSet rs=stmt.executeQuery("select * from employees");
            // int result = stmt.executeUpdate("delete from employees where id =5");
            // System.out.println(result +" records affected");
