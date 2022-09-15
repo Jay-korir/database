@@ -26,15 +26,26 @@ public class MysqlEmployee<T extends IEntity> implements IStudentDB<T>{
         // System.out.println(test);
       //  return test;
 
+    static    boolean isFirstColumn = true;
 
     @Override
     public String createInsertQuery(T t) {
         StringBuilder stringBuilder = new StringBuilder("INSERT into ");
         stringBuilder.append(t.getTableName());
         stringBuilder.append("(");
-        stringBuilder.append(")").append("values").append("(");
+/*
+        List<String> targetColumns = new ArrayList<>();
+        for (String column : t.getColumns()){
+            if (!isFirstColumn)
+                stringBuilder.append(",");
+            stringBuilder.append("'").append(column).append("'");
+           targetColumns.add(column);
+            isFirstColumn = false;
 
-        boolean isFirstColumn = true;
+        }*/
+        stringBuilder.append(")").append("  values").append("(");
+
+
 
             for (Object object : t.getTargetColumns()){
                 if (!isFirstColumn)
@@ -58,14 +69,7 @@ public class MysqlEmployee<T extends IEntity> implements IStudentDB<T>{
         System.out.println("table =="+t.getTableName());
         System.out.println("query =="+stringBuilder);
         rs = executeReadQuery(stringBuilder.toString());
-       // System.out.println(rs);
-        ArrayList<ResultSet>  list = new ArrayList<>();
-       // while (resultSet.next()){
-       //     list.add(resultSet);
-           // System.out.println(resultSet.getInt("id"));
-         //   System.out.println(resultSet.getString("name"));
-       // }
-       // list.add(resultSet);
+
         return rs;
     }
 /*

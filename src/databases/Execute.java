@@ -14,13 +14,15 @@ public class Execute {
     static EmployeeRecord emp;
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         emp = new EmployeeRecord();
+
         iStudentDB = new MysqlEmployee<EmployeeRecord>();
-       // register();
+        iStudentDB = new MysqlEmployee<EmployeeAccount>();
+        register();
         //System.out.println("successfully added a new employee");
        // registerAcc();
        // System.out.println("successfully added records of payment");
-        displayEmployees();
-        //displayAccounts();
+       // displayEmployees();
+       // displayAccounts();
         //displayEmployee(5);
         //updateRecord();
        // deleteRecord(8);
@@ -77,10 +79,7 @@ public class Execute {
 
       ResultSet resultSet=  iStudentDB.getData(emp);
 
-      // System.out.println(emp);
 
-      // System.out.println("progress");
-       System.out.println(resultSet.next());
        while (resultSet.next()){
            EmployeeRecord e1 = new EmployeeRecord();
       e1.setId(resultSet.getInt("id"));
@@ -89,20 +88,18 @@ e1.setAge(resultSet.getInt("age"));
 
        System.out.println(e1);
        }
-       // for (EmployeeRecord employeeRecord : employeeRecordList)
-
-       //while (employeeRecordList.get(emp.getId()))
-
-       //for(int i =0; i <employeeRecordList.size(); i++) {
-        //   System.out.println(employeeRecordList.get(i).toString());
-      // }
-
-
-    }
+            }
     public  static  void displayAccounts() throws SQLException {
-      //  List<EmployeeAccount>  employeeAccounts = iStudentDB.getEmployees();
-       // for (EmployeeAccount employeeAccount: employeeAccounts)
-        //    System.out.println(employeeAccount);
+       EmployeeAccount  employeeAccounts = new EmployeeAccount();
+       ResultSet rs = iStudentDB.getData(employeeAccounts);
+
+         while (rs.next()){
+             EmployeeAccount e2 = new EmployeeAccount();
+             e2.setId(rs.getInt("id"));
+             e2.setName(rs.getString("name"));
+             e2.setSalary(rs.getInt("salary"));
+             System.out.println(e2);
+         }
     }
     /*
     public static void displayEmployee(int id) throws SQLException {

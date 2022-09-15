@@ -45,4 +45,13 @@ public class EmployeeAccount extends IEntity {
     public void setSalary(Integer salary) {
         this.salary = salary;
     }
+
+    @Override
+    public String toString() {
+        return "EmployeeAccount{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", salary=" + salary +
+                '}';
+    }
 }
