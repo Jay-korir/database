@@ -48,7 +48,7 @@ public class EmployeeRecord extends IEntity {
 
     @Override
     public String toString() {
-        return "StudentRecord{" +
+        return "EmployeeRecord{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age='" + age + '\'' +

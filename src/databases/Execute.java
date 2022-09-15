@@ -11,9 +11,10 @@ import java.util.Scanner;
 public class Execute {
     static Scanner scanner = new Scanner(System.in);
     static IStudentDB iStudentDB;
+    static EmployeeRecord emp;
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-
-        iStudentDB = new MysqlEmployee<>();
+        emp = new EmployeeRecord();
+        iStudentDB = new MysqlEmployee<EmployeeRecord>();
        // register();
         //System.out.println("successfully added a new employee");
        // registerAcc();
@@ -73,10 +74,29 @@ public class Execute {
 
     }
    public static  void displayEmployees() throws SQLException, ClassNotFoundException {
-        EmployeeRecord emp = new EmployeeRecord();
-        List<EmployeeRecord> employeeRecordList = iStudentDB.getData(emp);
+
+      ResultSet resultSet=  iStudentDB.getData(emp);
+
+      // System.out.println(emp);
+
+      // System.out.println("progress");
+       System.out.println(resultSet.next());
+       while (resultSet.next()){
+           EmployeeRecord e1 = new EmployeeRecord();
+      e1.setId(resultSet.getInt("id"));
+e1.setName(resultSet.getString("name"));
+e1.setAge(resultSet.getInt("age"));
+
+       System.out.println(e1);
+       }
        // for (EmployeeRecord employeeRecord : employeeRecordList)
-       System.out.println(employeeRecordList);
+
+       //while (employeeRecordList.get(emp.getId()))
+
+       //for(int i =0; i <employeeRecordList.size(); i++) {
+        //   System.out.println(employeeRecordList.get(i).toString());
+      // }
+
 
     }
     public  static  void displayAccounts() throws SQLException {

@@ -7,7 +7,7 @@ import java.util.List;
 public class MysqlEmployee<T extends IEntity> implements IStudentDB<T>{
 
     Statement statement;
-    private ResultSet resultSet;
+   // private ResultSet resultSet;
     public MysqlEmployee () throws SQLException, ClassNotFoundException {
         this.openConnection();
     }
@@ -48,21 +48,25 @@ public class MysqlEmployee<T extends IEntity> implements IStudentDB<T>{
         return stringBuilder.toString();
     }
 
+    static  ResultSet rs;
     @Override
-    public List<T> getData(T t) throws SQLException {
+    public ResultSet getData(T t) throws SQLException {
 
 
         StringBuilder stringBuilder = new StringBuilder("SELECT * FROM ");
         stringBuilder.append(t.getTableName());
         System.out.println("table =="+t.getTableName());
         System.out.println("query =="+stringBuilder);
-        resultSet = executeReadQuery(stringBuilder.toString());
-       // System.out.println(resultSet);
-        ArrayList<T>  list = new ArrayList<>();
-        while (resultSet.next()){
-            t.getTargetColumns().add(list);
-        }
-        return list;
+        rs = executeReadQuery(stringBuilder.toString());
+       // System.out.println(rs);
+        ArrayList<ResultSet>  list = new ArrayList<>();
+       // while (resultSet.next()){
+       //     list.add(resultSet);
+           // System.out.println(resultSet.getInt("id"));
+         //   System.out.println(resultSet.getString("name"));
+       // }
+       // list.add(resultSet);
+        return rs;
     }
 /*
    @Override

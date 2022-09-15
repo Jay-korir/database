@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec297b89-b40c-400c-b4c7-53c75cd5579b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/databases/Collections2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/databases/EmployeeAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/databases/Generics.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/databases/IEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/databases/EmployeeRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/databases/EmployeeRecord.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/databases/Execute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/databases/Execute.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/databases/IStudentDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/databases/IStudentDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/databases/MysqlEmployee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/databases/MysqlEmployee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/databases/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/databases/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
