@@ -1,10 +1,26 @@
 package databases;
 
-public class EmployeeRecord {
-    private int id;
-    private String name;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-    private  int age;
+public class EmployeeRecord extends IEntity {
+    private  int id;
+    private  String name;
+
+    private    int age;
+
+    static   String tableName = "employees";
+
+  static   String[] column = {"id", "name","age"};
+
+  static    List<String> columns = new ArrayList<>(Arrays.asList(column));;
+
+
+    public EmployeeRecord() {
+        super(columns,tableName);
+    }
 
     public int getAge() {
         return age;

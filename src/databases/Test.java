@@ -11,13 +11,15 @@ public class Test {
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/test", "root", "");
             // System.out.println( DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root",""));
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_UPDATABLE);
-            PreparedStatement prepStmt = con.prepareStatement(
-                    String.valueOf(stmt),
-                    ResultSet.TYPE_FORWARD_ONLY,
-                    ResultSet.CONCUR_UPDATABLE);
-            //PreparedStatement stmt1=con.prepareStatement("update employees set name=? where id=?");
+
+        Statement stmt=con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+        ResultSet rs=stmt.executeQuery("select * from payment");
+
+//getting the record of 3rd row
+        rs.absolute(3);
+        System.out.println(rs.getInt(1)+" "+rs.getString(2)+" "+rs.getInt(3));
+con.close();
+        //PreparedStatement stmt1=con.prepareStatement("update employees set name=? where id=?");
             // stmt1.setString(1,"Sonoo");
             // stmt1.setInt(2,101);
             // int i=stmt1.executeUpdate();
@@ -26,13 +28,13 @@ public class Test {
             // int result = stmt.executeUpdate("delete from employees where id =5");
             //System.out.println(result +" records affected");
             //  rs.updateRow();
-            DatabaseMetaData dbmd = con.getMetaData();
+           /* DatabaseMetaData dbmd = con.getMetaData();
 
             System.out.println("Driver Name: " + dbmd.getDriverName());
             System.out.println("Driver Version: " + dbmd.getDriverVersion());
             System.out.println("UserName: " + dbmd.getUserName());
             System.out.println("Database Product Name: " + dbmd.getDatabaseProductName());
-            System.out.println("Database Product Version: " + dbmd.getDatabaseProductVersion());
+            System.out.println("Database Product Version: " + dbmd.getDatabaseProductVersion());*/
 
 
     }

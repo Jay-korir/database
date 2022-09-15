@@ -4,10 +4,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface IStudentDB {
-    String createInsertQuery(EmployeeRecord employeeRecord);
-     List<EmployeeRecord> getEmployees() throws SQLException;
-    EmployeeRecord getEmployee(int id) throws SQLException;
+public interface IStudentDB<T extends IEntity> {
+    String createInsertQuery(T t);
+
+    List<T>  getData(T t) throws SQLException;
+   // List<EmployeeRecord> getEmployees() throws SQLException;
+  //  EmployeeRecord getEmployee(int id) throws SQLException;
     boolean executeQuery(String query) throws SQLException;
     ResultSet executeReadQuery(String query) throws SQLException;
 

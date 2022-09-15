@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MysqlEmployee implements IStudentDB{
+public class MysqlEmployee<T extends IEntity> implements IStudentDB<T>{
 
     Statement statement;
     private ResultSet resultSet;
@@ -19,19 +19,56 @@ public class MysqlEmployee implements IStudentDB{
         System.out.println("success");
         return true;
     }
-    @Override
-    public String createInsertQuery(EmployeeRecord emp) {
-        // String test = ("insert into employees(id,name,age) values(" + emp.getId() + ", '"+ emp.getName() +"', '"+ emp.getAge()+"')';";
-        String test = ("insert into employees(id,name,age) values(\""+ emp.getId() +"\" ,\""+ emp.getName() +"\" , \"" + emp.getAge()+ "\" )");
-        // System.out.println(test);
-        return test;
 
+   // public String createInsertQuery(EmployeeRecord emp) {
+        // String test = ("insert into employees(id,name,age) values(" + emp.getId() + ", '"+ emp.getName() +"', '"+ emp.getAge()+"')';";
+     //   String test = ("insert into employees(id,name,age) values(\""+ emp.getId() +"\" ,\""+ emp.getName() +"\" , \"" + emp.getAge()+ "\" )");
+        // System.out.println(test);
+      //  return test;
+
+
+    @Override
+    public String createInsertQuery(T t) {
+        StringBuilder stringBuilder = new StringBuilder("INSERT into ");
+        stringBuilder.append(t.getTableName());
+        stringBuilder.append("(");
+        stringBuilder.append(")").append("values").append("(");
+
+        boolean isFirstColumn = true;
+
+            for (Object object : t.getTargetColumns()){
+                if (!isFirstColumn)
+                    stringBuilder.append(",");
+                stringBuilder.append("'").append(object).append("'");
+                isFirstColumn = false;
+            }
+
+        stringBuilder.append(")");
+       // System.out.println(stringBuilder.toString());
+        return stringBuilder.toString();
     }
 
     @Override
-    public  List<EmployeeRecord> getEmployees() throws SQLException {
+    public List<T> getData(T t) throws SQLException {
 
-        ArrayList<EmployeeRecord> employees = new ArrayList<EmployeeRecord>();
+
+        StringBuilder stringBuilder = new StringBuilder("SELECT * FROM ");
+        stringBuilder.append(t.getTableName());
+        System.out.println("table =="+t.getTableName());
+        System.out.println("query =="+stringBuilder);
+        resultSet = executeReadQuery(stringBuilder.toString());
+       // System.out.println(resultSet);
+        ArrayList<T>  list = new ArrayList<>();
+        while (resultSet.next()){
+            t.getTargetColumns().add(list);
+        }
+        return list;
+    }
+/*
+   @Override
+    public  List<?> getEmployees() throws SQLException {
+
+        ArrayList<EmployeeRecord> employees = new ArrayList<>();
         String query = "select * from employees";
          resultSet = executeReadQuery(query);
 
@@ -45,6 +82,7 @@ public class MysqlEmployee implements IStudentDB{
         return employees;
     }
 
+
     @Override
     public EmployeeRecord getEmployee(int id) throws SQLException {
         String query = "SELECT * from employees WHERE id = " + id +";";
@@ -56,7 +94,7 @@ while (resultSet.next()){
     emp.setAge(resultSet.getInt("age"));
 }
         return emp;
-    }
+    }*/
 
     @Override
     public boolean executeQuery(String query) throws SQLException {
@@ -71,6 +109,8 @@ while (resultSet.next()){
             return false;
         }
     }
+
+
 
     @Override
     public ResultSet executeReadQuery(String query) throws SQLException {
