@@ -26,26 +26,26 @@ public class MysqlEmployee<T extends IEntity> implements IStudentDB<T>{
         // System.out.println(test);
       //  return test;
 
-    static    boolean isFirstColumn = true;
+
 
     @Override
     public String createInsertQuery(T t) {
         StringBuilder stringBuilder = new StringBuilder("INSERT into ");
         stringBuilder.append(t.getTableName());
         stringBuilder.append("(");
-/*
+boolean isFirstColum = true;
         List<String> targetColumns = new ArrayList<>();
         for (String column : t.getColumns()){
-            if (!isFirstColumn)
+            if (!isFirstColum)
                 stringBuilder.append(",");
             stringBuilder.append("'").append(column).append("'");
            targetColumns.add(column);
-            isFirstColumn = false;
+            isFirstColum = false;
 
-        }*/
+        }
         stringBuilder.append(")").append("  values").append("(");
 
-
+           boolean isFirstColumn = true;
 
             for (Object object : t.getTargetColumns()){
                 if (!isFirstColumn)
@@ -114,6 +114,7 @@ while (resultSet.next()){
             return  true;
         }catch (SQLException e){
             System.out.println("an error failed");
+
             return false;
         }
     }
